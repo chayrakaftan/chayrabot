@@ -207,7 +207,7 @@ export function generateResponse(intent: Intent, message: string, lang: Lang, co
         return {
           reply: lang === 'en'
             ? '🇲🇦 Our gandouras are designed and made in **Morocco**.\nThe **Sfifa** is an ancestral embroidery, handcrafted by Moroccan artisans following traditional techniques passed down through generations.\n\nWhich model would you like to know the fabric of?'
-            : '🇲🇦 Nos gandouras sont conçues et fabriquées au **Maroc**.\nLa **Sfifa** est une broderie ancestrale, réalisée entièrement à la main par des artisans marocains selon un savoir-faire transmis de génération en génération.\n\nDe quel modèle souhaitez-vous connaître la matière ?',
+            : 'Nos gandouras sont conçues et fabriquées au **Maroc** 🇲🇦\nLa **Sfifa** est une broderie ancestrale, réalisée entièrement à la main par des artisans marocains selon un savoir-faire transmis de génération en génération.\n\nDe quel modèle souhaitez-vous connaître la matière ?',
           suggestions: ['Gandoura Abaya', 'Gandoura Papillon', 'Gandoura Mixte', 'Autre question'],
           context: { awaitingFabricModel: true },
         }
