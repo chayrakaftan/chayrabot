@@ -36,7 +36,7 @@ export const PRODUCTS: Product[] = [
 // LIVRAISON
 // ============================================================
 export const SHIPPING = {
-  processing: '2 à 7 jours ouvrés de préparation',
+  processing: '24 à 48h de préparation',
   france: {
     free: 'Gratuite dès 65€ ou 2 articles',
     paid: '8,99€ si commande < 65€ et 1 seul article',

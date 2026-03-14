@@ -35,15 +35,15 @@ export function generateResponse(intent: Intent, message: string, lang: Lang, co
       if (/(aid|eid|ramadan|fete|a temps)/.test(m)) {
         return {
           reply: lang === 'en'
-            ? '🕌 Orders before Eid are prioritized! Processing: 2-7 days + shipping.'
-            : '🕌 Commandes avant l\'Aïd prioritaires !\nPréparation : 2-7j + livraison.',
+            ? '🕌 Orders before Eid are prioritized! Processing: 24-48h + shipping.'
+            : '🕌 Commandes avant l\'Aïd prioritaires !\nPréparation : 24-48h + livraison.',
           suggestions,
         }
       }
       return {
         reply: lang === 'en'
-          ? '⏱️ Processing: 2-7 business days.\nColissimo ~2 days, Mondial Relay 3-5 days.'
-          : '⏱️ Préparation : 2-7 jours ouvrés.\nColissimo ~2j, Mondial Relay 3-5j.',
+          ? '⏱️ Processing: 24-48h.\nColissimo ~2 days, Mondial Relay 3-5 days.'
+          : '⏱️ Préparation : 24-48h.\nColissimo ~2j, Mondial Relay 3-5j.',
         suggestions,
       }
     }
