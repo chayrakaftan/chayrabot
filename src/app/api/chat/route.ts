@@ -4,6 +4,7 @@ import { detectIntent, detectOrderNumber, detectEmail } from '@/lib/intents'
 import { generateResponse } from '@/lib/responses'
 import { detectLanguage, t, getSuggestions } from '@/lib/i18n'
 import { getOrderByNumber, verifyEmail, formatOrderStatus } from '@/lib/shopify'
+import { PRODUCTS } from '@/lib/knowledge-base'
 
 export async function OPTIONS() {
   return new NextResponse(null, {
@@ -53,6 +54,48 @@ export async function POST(req: NextRequest) {
         reply: '📦 Dans quel pays êtes-vous ? (France, Belgique, autre pays EU)',
         suggestions: ['France', 'Belgique', 'Autre pays EU', 'Autre question'],
         context: { awaitingCountry: true },
+        lang,
+      })
+    }
+
+    // ============================================================
+    // FLOW: Awaiting model for mannequin size
+    // ============================================================
+    if (context?.awaitingModel) {
+      const m = msg.toLowerCase()
+      const suggestions = getSuggestions(lang)
+      type CollectionKey = 'abaya' | 'papillon' | 'mixte'
+      const collections: { key: CollectionKey; regex: RegExp; label: string }[] = [
+        { key: 'abaya', regex: /(abaya)/, label: 'Gandoura Abaya' },
+        { key: 'papillon', regex: /(papillon)/, label: 'Gandoura Papillon' },
+        { key: 'mixte', regex: /(mixte)/, label: 'Gandoura Mixte' },
+      ]
+      for (const col of collections) {
+        if (col.regex.test(m)) {
+          const products = PRODUCTS.filter(p => p.collection === col.key)
+          const sizes = products.map(p => {
+            const colorName = p.name.split(' ').pop()
+            return `• ${colorName} : mannequin ${p.mannequin}`
+          }).join('\n')
+          return json({
+            reply: `📏 **${col.label}** :\n${sizes}`,
+            suggestions,
+            lang,
+          })
+        }
+      }
+      // Not a model → try normal intent
+      const intent = detectIntent(msg)
+      if (intent !== 'question_generale') {
+        const resp = generateResponse(intent, msg, lang)
+        return json({ ...resp, lang })
+      }
+      return json({
+        reply: lang === 'en'
+          ? '📏 Which model? Abaya, Papillon or Mixte?'
+          : '📏 Quel modèle ? Abaya, Papillon ou Mixte ?',
+        suggestions: ['Gandoura Abaya', 'Gandoura Papillon', 'Gandoura Mixte', 'Autre question'],
+        context: { awaitingModel: true },
         lang,
       })
     }

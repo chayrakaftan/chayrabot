@@ -117,6 +117,7 @@ export function generateResponse(intent: Intent, message: string, lang: Lang, co
           ? '📏 Which model would you like to know the mannequin size for?'
           : '📏 Pour quel modèle souhaitez-vous connaître la taille du mannequin ?',
         suggestions: ['Gandoura Abaya', 'Gandoura Papillon', 'Gandoura Mixte', 'Autre question'],
+        context: { awaitingModel: true },
       }
     }
 
