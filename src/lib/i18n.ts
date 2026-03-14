@@ -12,7 +12,7 @@ const FR: Strings = {
   orderShipped: '📦 Votre commande **#{order}** a été expédiée !\nNuméro de suivi : **{tracking}**\n🔗 [Suivre mon colis]({trackingUrl})',
   orderDelivered: '✅ Votre commande **#{order}** a été livrée !',
   orderRefunded: '💰 Votre commande **#{order}** a été remboursée.',
-  orderProcessing: '⏳ Votre commande **#{order}** est en cours de traitement. Expédition sous 24-48h.',
+  orderProcessing: '⏳ Votre commande **#{order}** est en cours de traitement. Expédition sous 24h.',
   escalate: 'Pour cette demande, je vous invite à contacter notre équipe par email : **chayrakaftan@gmail.com** en précisant votre numéro de commande.',
   thanks: 'Avec plaisir ! N\'hésitez pas si vous avez d\'autres questions. 😊',
   greeting: 'Bonjour ! 👋 Comment puis-je vous aider aujourd\'hui ?',
@@ -28,7 +28,7 @@ const EN: Strings = {
   orderShipped: '📦 Your order **#{order}** has been shipped!\nTracking: **{tracking}**\n🔗 [Track my parcel]({trackingUrl})',
   orderDelivered: '✅ Your order **#{order}** has been delivered!',
   orderRefunded: '💰 Your order **#{order}** has been refunded.',
-  orderProcessing: '⏳ Your order **#{order}** is being processed. Shipping within 24-48h.',
+  orderProcessing: '⏳ Your order **#{order}** is being processed. Shipping within 24h.',
   escalate: 'For this request, please contact our team at: **chayrakaftan@gmail.com** with your order number.',
   thanks: 'You\'re welcome! Don\'t hesitate if you have more questions. 😊',
   greeting: 'Hello! 👋 How can I help you today?',
@@ -44,7 +44,7 @@ const AR: Strings = {
   orderShipped: '📦 تم شحن طلبك **#{order}**!\nرقم التتبع: **{tracking}**',
   orderDelivered: '✅ تم تسليم طلبك **#{order}**!',
   orderRefunded: '💰 تم استرداد مبلغ طلبك **#{order}**.',
-  orderProcessing: '⏳ طلبك **#{order}** قيد المعالجة. الشحن خلال 24-48 ساعة.',
+  orderProcessing: '⏳ طلبك **#{order}** قيد المعالجة. الشحن خلال 24 ساعة.',
   escalate: 'لهذا الطلب، يرجى التواصل معنا على: **chayrakaftan@gmail.com**',
   thanks: '!على الرحب والسعة 😊',
   greeting: '!مرحبا 👋 كيف يمكنني مساعدتك اليوم؟',
@@ -73,7 +73,7 @@ export function detectLanguage(message: string): Lang {
 }
 
 export function getSuggestions(lang: Lang): string[] {
-  if (lang === 'en') return ['Where is my order?', 'Shipping cost', 'Delivery times', 'How to return?', 'Size guide', 'Contact us']
-  if (lang === 'ar') return ['أين طلبي؟', 'تكلفة الشحن', 'مواعيد التوصيل', 'كيفية الإرجاع', 'دليل المقاسات', 'اتصل بنا']
-  return ['Où est ma commande ?', 'Frais de livraison', 'Délais de livraison', 'Retour', 'Tailles', 'Nous contacter']
+  if (lang === 'en') return ['Where is my order?', 'Shipping cost', 'Delivery times', 'Delivered before Eid?', 'Size guide', 'Contact us']
+  if (lang === 'ar') return ['أين طلبي؟', 'تكلفة الشحن', 'مواعيد التوصيل', 'التوصيل قبل العيد؟', 'دليل المقاسات', 'اتصل بنا']
+  return ['Où est ma commande ?', 'Frais de livraison', 'Délais de livraison', 'Livré avant l\'Aïd ?', 'Tailles', 'Nous contacter']
 }

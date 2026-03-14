@@ -36,12 +36,12 @@ export const PRODUCTS: Product[] = [
 // LIVRAISON
 // ============================================================
 export const SHIPPING = {
-  processing: '24 à 48h de préparation',
+  processing: '24h de préparation',
   france: {
     free: 'Gratuite dès 65€ ou 2 articles',
     paid: '8,99€ si commande < 65€ et 1 seul article',
     colissimo: '~2 jours ouvrables',
-    mondialRelay: '3-5 jours ouvrables (point relais)',
+    mondialRelay: '2-4 jours ouvrables (point relais)',
     chronopost: '1-3 jours ouvrables',
   },
   europe: {
