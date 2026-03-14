@@ -48,9 +48,8 @@ export function formatOrderStatus(order: ShopifyOrder): {
   const tracking = fulfillment?.tracking_number || undefined
   const trackingUrl = fulfillment?.tracking_url || 'https://chayrakaftan.com/apps/parcelpanel'
 
-  // Determine if delivered
+  // Determine if delivered (only explicit delivery statuses)
   const isDelivered = fulfillment?.status === 'delivered'
-    || fulfillment?.status === 'success'
     || order.tags?.includes('delivered')
     || order.tags?.includes('livré')
 
