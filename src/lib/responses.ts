@@ -114,8 +114,8 @@ export function generateResponse(intent: Intent, message: string, lang: Lang, co
       }
       return {
         reply: lang === 'en'
-          ? '📏 **Sizes:**\n• Abaya: one size 36-44\n• Papillon: one size 36-46\n• Mixte: one size 36-44\n\nAll loose & airy cuts. Which one?'
-          : '📏 **Tailles :**\n• Abaya : unique 36-44\n• Papillon : unique 36-46\n• Mixte : unique 36-44\n\nCoupes amples et aériennes. Quel modèle ?',
+          ? '📏 Which model would you like to know the mannequin size for?'
+          : '📏 Pour quel modèle souhaitez-vous connaître la taille du mannequin ?',
         suggestions: ['Gandoura Abaya', 'Gandoura Papillon', 'Gandoura Mixte', 'Autre question'],
       }
     }
