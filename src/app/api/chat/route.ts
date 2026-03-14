@@ -68,7 +68,6 @@ export async function POST(req: NextRequest) {
     if (context?.awaitingModel) {
       const m = msg.toLowerCase()
       const suggestions = getSuggestions(lang)
-      // "Autre question" → exit model flow
       if (/autre\s*(question|chose)/.test(m)) {
         return json({ reply: t('greeting', lang), suggestions, lang })
       }
@@ -81,18 +80,18 @@ export async function POST(req: NextRequest) {
       for (const col of collections) {
         if (col.regex.test(m)) {
           const products = PRODUCTS.filter(p => p.collection === col.key)
-          const sizes = products.map(p => {
-            const colorName = p.name.split(' ').pop()
-            return `• ${colorName} : mannequin ${p.mannequin}`
-          }).join('\n')
+          const colorSuggestions = products.map(p => p.name.split(' ').pop() || '').filter(Boolean)
+          colorSuggestions.push('Autre question')
           return json({
-            reply: `📏 **${col.label}** :\n${sizes}`,
-            suggestions,
+            reply: lang === 'en'
+              ? `📏 Which color of **${col.label}**?`
+              : `📏 Quelle couleur de **${col.label}** ?`,
+            suggestions: colorSuggestions,
+            context: { awaitingColor: true, selectedCollection: col.key },
             lang,
           })
         }
       }
-      // Not a model → try normal intent
       const intent = detectIntent(msg)
       if (intent !== 'question_generale') {
         const resp = generateResponse(intent, msg, lang)
@@ -104,6 +103,46 @@ export async function POST(req: NextRequest) {
           : '📏 Quel modèle ? Abaya, Papillon ou Mixte ?',
         suggestions: ['Gandoura Abaya', 'Gandoura Papillon', 'Gandoura Mixte', 'Autre question'],
         context: { awaitingModel: true },
+        lang,
+      })
+    }
+
+    // ============================================================
+    // FLOW: Awaiting color for mannequin size
+    // ============================================================
+    if (context?.awaitingColor && context.selectedCollection) {
+      const m = msg.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      const suggestions = getSuggestions(lang)
+      if (/autre\s*(question|chose)/.test(m)) {
+        return json({ reply: t('greeting', lang), suggestions, lang })
+      }
+      const products = PRODUCTS.filter(p => p.collection === context.selectedCollection)
+      const found = products.find(p => {
+        const colorName = (p.name.split(' ').pop() || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        return m.includes(colorName) || colorName.includes(m)
+      })
+      if (found) {
+        return json({
+          reply: lang === 'en'
+            ? `📏 The mannequin size for **${found.name}** is **${found.mannequin}**.`
+            : `📏 La taille du mannequin sur **${found.name}** est de **${found.mannequin}**.`,
+          suggestions,
+          lang,
+        })
+      }
+      const intent = detectIntent(msg)
+      if (intent !== 'question_generale') {
+        const resp = generateResponse(intent, msg, lang)
+        return json({ ...resp, lang })
+      }
+      const colorSuggestions = products.map(p => p.name.split(' ').pop() || '').filter(Boolean)
+      colorSuggestions.push('Autre question')
+      return json({
+        reply: lang === 'en'
+          ? '📏 Which color?'
+          : '📏 Quelle couleur ?',
+        suggestions: colorSuggestions,
+        context: { awaitingColor: true, selectedCollection: context.selectedCollection },
         lang,
       })
     }
