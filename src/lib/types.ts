@@ -28,6 +28,7 @@ export interface ChatRequest {
 export interface ChatContext {
   awaitingOrderNumber?: boolean
   awaitingEmail?: boolean
+  awaitingCountry?: boolean
   orderNumber?: string
   email?: string
   lastIntent?: Intent

@@ -65,6 +65,7 @@ export function generateResponse(intent: Intent, message: string, lang: Lang, co
           ? '📦 Which country are you in? I\'ll give you the exact cost!'
           : '📦 Dans quel pays êtes-vous ? Je vous donne les frais exacts !',
         suggestions: ['France', 'Belgique', 'Autre pays EU', 'Autre question'],
+        context: { awaitingCountry: true },
       }
     }
 

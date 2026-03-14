@@ -28,6 +28,36 @@ export async function POST(req: NextRequest) {
     const msg = message.trim()
 
     // ============================================================
+    // FLOW: Awaiting country for shipping cost
+    // ============================================================
+    if (context?.awaitingCountry) {
+      const m = msg.toLowerCase()
+      const suggestions = getSuggestions(lang)
+      if (/(france|français|francais|métropole|metropole)/.test(m)) {
+        return json({ reply: '📦 France : livraison **offerte dès 2 articles** ! Sinon 8,99€.', suggestions, lang })
+      }
+      if (/(belgique|luxembourg|belge|lux)/.test(m)) {
+        return json({ reply: '📦 Belgique/Luxembourg : **15,99€**', suggestions, lang })
+      }
+      if (/(espagne|italie|allemagne|portugal|pays-bas|europe|eu|autre)/.test(m)) {
+        return json({ reply: '📦 Autres pays EU : **19,50€**', suggestions, lang })
+      }
+      // Not a country → try normal intent
+      const intent = detectIntent(msg)
+      if (intent !== 'question_generale') {
+        const resp = generateResponse(intent, msg, lang)
+        return json({ ...resp, lang })
+      }
+      // Still not understood → re-ask
+      return json({
+        reply: '📦 Dans quel pays êtes-vous ? (France, Belgique, autre pays EU)',
+        suggestions: ['France', 'Belgique', 'Autre pays EU', 'Autre question'],
+        context: { awaitingCountry: true },
+        lang,
+      })
+    }
+
+    // ============================================================
     // FLOW: Awaiting order number
     // ============================================================
     if (context?.awaitingOrderNumber) {
