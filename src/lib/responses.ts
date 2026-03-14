@@ -195,8 +195,8 @@ export function generateResponse(intent: Intent, message: string, lang: Lang, co
             suggestions,
           }
         }
-        // Generic fabrication question
-        if (/(matiere|tissu|fabric|composition|en quoi)/.test(m)) {
+        // Generic material question (but not "fabrication" which should show Sfifa)
+        if (/(matiere|tissu|composition|en quoi)/.test(m) || (/fabric/.test(m) && !/fabrication/.test(m))) {
           return {
             reply: lang === 'en'
               ? '🧵 What material would you like to know about?'
