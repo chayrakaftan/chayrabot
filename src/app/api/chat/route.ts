@@ -87,6 +87,37 @@ export async function POST(req: NextRequest) {
     }
 
     // ============================================================
+    // FLOW: Awaiting model for fabric info
+    // ============================================================
+    if (context?.awaitingFabricModel) {
+      const m = msg.toLowerCase()
+      const suggestions = getSuggestions(lang)
+      if (/autre\s*(question|chose)/.test(m)) {
+        return json({ reply: t('greeting', lang), suggestions, lang })
+      }
+      if (/(abaya)/.test(m)) {
+        return json({ reply: '🧵 La **Gandoura Abaya** est fabriquée en **70% Crêpe, 30% Polyester**.', suggestions, lang })
+      }
+      if (/(papillon)/.test(m)) {
+        return json({ reply: '🧵 La **Gandoura Papillon** est fabriquée en **50% Lin, 50% Viscose**.', suggestions, lang })
+      }
+      if (/(mixte)/.test(m)) {
+        return json({ reply: '🧵 La **Gandoura Mixte** est fabriquée en **50% Lin, 50% Viscose**.', suggestions, lang })
+      }
+      const intent = detectIntent(msg)
+      if (intent !== 'question_generale') {
+        const resp = generateResponse(intent, msg, lang)
+        return json({ ...resp, lang })
+      }
+      return json({
+        reply: lang === 'en' ? '🧵 Which model?' : '🧵 Quel modèle ?',
+        suggestions: ['Gandoura Abaya', 'Gandoura Papillon', 'Gandoura Mixte', 'Autre question'],
+        context: { awaitingFabricModel: true },
+        lang,
+      })
+    }
+
+    // ============================================================
     // FLOW: Awaiting model for mannequin size
     // ============================================================
     if (context?.awaitingModel) {
