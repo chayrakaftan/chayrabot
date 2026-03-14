@@ -144,9 +144,8 @@ export function generateResponse(intent: Intent, message: string, lang: Lang, co
     case 'info_produit': {
       const product = findProductFromMessage(message)
       if (product) {
-        const stock = product.inStock ? '✅ En stock' : '❌ Rupture'
         return {
-          reply: `✨ **${product.name}** — ${product.price}€\n${product.fabric} | ${product.sizes}\nMannequin : ${product.mannequin}\n${stock}`,
+          reply: `✨ **${product.name}**\n${product.fabric} | ${product.sizes}`,
           suggestions,
         }
       }
