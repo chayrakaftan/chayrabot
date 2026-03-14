@@ -73,7 +73,7 @@ export function detectLanguage(message: string): Lang {
 }
 
 export function getSuggestions(lang: Lang): string[] {
-  if (lang === 'en') return ['Where is my order?', 'Delivery times', 'How to return?', 'Size guide', 'Our products', 'Contact us']
-  if (lang === 'ar') return ['أين طلبي؟', 'مواعيد التوصيل', 'كيفية الإرجاع', 'دليل المقاسات', 'منتجاتنا', 'اتصل بنا']
-  return ['Où est ma commande ?', 'Délais de livraison', 'Comment faire un retour ?', 'Guide des tailles', 'Nos produits', 'Nous contacter']
+  if (lang === 'en') return ['Where is my order?', 'Shipping cost', 'Delivery times', 'How to return?', 'Size guide', 'Contact us']
+  if (lang === 'ar') return ['أين طلبي؟', 'تكلفة الشحن', 'مواعيد التوصيل', 'كيفية الإرجاع', 'دليل المقاسات', 'اتصل بنا']
+  return ['Où est ma commande ?', 'Frais de livraison', 'Délais de livraison', 'Retour', 'Tailles', 'Nous contacter']
 }

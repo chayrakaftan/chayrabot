@@ -49,12 +49,21 @@ export function detectIntent(message: string): Intent {
     return 'changement_adresse'
   }
 
-  // --- Livraison / Aïd ---
+  // --- Frais de livraison / prix ---
+  if (/(frais.*livr|frais de port|cout.*livr|prix.*livr|combien.*livr|tarif.*livr|shipping cost|livr.*gratuit|gratuit.*livr|livr.*offert|offert.*livr|livraison.*prix|livraison.*combien)/.test(m)) {
+    return 'frais_livraison'
+  }
+
+  // --- Délais de livraison / Aïd ---
   if (/(aid|eid|ramadan|fete|avant.*livr|livr.*avant|temps.*livr|a temps)/.test(m)) {
     return 'livraison'
   }
-  if (/(livraison|delai|combien de temps|frais de port|shipping|delivery|gratuit.*livr|livr.*gratuit)/.test(m)) {
+  if (/(delai|combien de temps|quand.*livr|livr.*quand|shipping|delivery|expedition|jours.*livr)/.test(m)) {
     return 'livraison'
+  }
+  // Fallback "livraison" seul → frais (demande le pays)
+  if (/(livraison)/.test(m)) {
+    return 'frais_livraison'
   }
 
   // --- Taille ---

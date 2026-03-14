@@ -2,6 +2,7 @@ export type Intent =
   | 'suivi_commande'
   | 'info_produit'
   | 'livraison'
+  | 'frais_livraison'
   | 'retour'
   | 'remboursement'
   | 'annulation'

@@ -29,41 +29,41 @@ export function generateResponse(intent: Intent, message: string, lang: Lang, co
         suggestions: ['#1234', 'Autre question'],
       }
 
-    // ==================== LIVRAISON ====================
+    // ==================== DÉLAIS LIVRAISON ====================
     case 'livraison': {
       const m = message.toLowerCase()
       if (/(aid|eid|ramadan|fete|a temps)/.test(m)) {
         return {
           reply: lang === 'en'
-            ? '🕌 We prioritize orders before Eid! Processing: 2-7 days + shipping.\n\nColissimo ~2 days, Chronopost 1-3 days.'
-            : '🕌 Commandes avant l\'Aïd prioritaires !\n\nDélai : 2-7j de prépa + livraison.\nColissimo ~2j, Chronopost 1-3j.',
+            ? '🕌 Orders before Eid are prioritized! Processing: 2-7 days + shipping.'
+            : '🕌 Commandes avant l\'Aïd prioritaires !\nPréparation : 2-7j + livraison.',
           suggestions,
         }
       }
-      // Si mention d'un pays spécifique
-      if (/(belgique|luxembourg|belge|lux)/.test(m)) {
-        return {
-          reply: '📦 Belgique/Luxembourg : **15,99€** de frais de port.\nDélai : 2-7 jours ouvrés.',
-          suggestions,
-        }
-      }
-      if (/(espagne|italie|allemagne|portugal|pays-bas|europe|eu\b)/.test(m)) {
-        return {
-          reply: '📦 Autres pays EU : **19,50€** de frais de port.\nDélai : 2-7 jours ouvrés.',
-          suggestions,
-        }
-      }
-      if (/(france|français|francais|métropole|metropole)/.test(m)) {
-        return {
-          reply: '📦 France : livraison **offerte dès 2 articles** ! Sinon 8,99€.\nDélai : 2-7 jours ouvrés.',
-          suggestions,
-        }
-      }
-      // Question générale → demander le pays
       return {
         reply: lang === 'en'
-          ? '📦 Delivery is 2-7 business days. Which country are you in? I\'ll give you the exact shipping cost!'
-          : '📦 Livraison sous 2-7 jours ouvrés.\n\nDans quel pays êtes-vous ? Je vous donne les frais exacts !',
+          ? '⏱️ Processing: 2-7 business days.\nColissimo ~2 days, Mondial Relay 3-5 days.'
+          : '⏱️ Préparation : 2-7 jours ouvrés.\nColissimo ~2j, Mondial Relay 3-5j.',
+        suggestions,
+      }
+    }
+
+    // ==================== FRAIS LIVRAISON ====================
+    case 'frais_livraison': {
+      const m = message.toLowerCase()
+      if (/(belgique|luxembourg|belge|lux)/.test(m)) {
+        return { reply: '📦 Belgique/Luxembourg : **15,99€**', suggestions }
+      }
+      if (/(espagne|italie|allemagne|portugal|pays-bas|europe|eu\b)/.test(m)) {
+        return { reply: '📦 Autres pays EU : **19,50€**', suggestions }
+      }
+      if (/(france|français|francais|métropole|metropole)/.test(m)) {
+        return { reply: '📦 France : livraison **offerte dès 2 articles** ! Sinon 8,99€.', suggestions }
+      }
+      return {
+        reply: lang === 'en'
+          ? '📦 Which country are you in? I\'ll give you the exact cost!'
+          : '📦 Dans quel pays êtes-vous ? Je vous donne les frais exacts !',
         suggestions: ['France', 'Belgique', 'Autre pays EU', 'Autre question'],
       }
     }
@@ -211,8 +211,8 @@ export function generateResponse(intent: Intent, message: string, lang: Lang, co
     default:
       return {
         reply: lang === 'en'
-          ? 'I can help with: 📦 Order tracking, 📏 Sizes, 🚚 Delivery, ↩️ Returns.\n\nOr email **chayrakaftan@gmail.com**'
-          : 'Je peux vous aider avec : 📦 Suivi commande, 📏 Tailles, 🚚 Livraison, ↩️ Retours.\n\nOu écrivez à **chayrakaftan@gmail.com**',
+          ? 'Sorry, I didn\'t understand your request. 😅\nCan I help you with something else?'
+          : 'Désolé, je n\'ai pas compris votre demande. 😅\nPuis-je vous aider avec autre chose ?',
         suggestions,
       }
   }
