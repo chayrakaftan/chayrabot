@@ -35,15 +35,15 @@ export function generateResponse(intent: Intent, message: string, lang: Lang, co
       if (/(aid|eid|ramadan|fete|a temps)/.test(m)) {
         return {
           reply: lang === 'en'
-            ? '🕌 Orders before Eid are prioritized!\nColissimo: delivered in 2-3 days.\nMondial Relay: delivered in 3-5 days.\n\n_(24h processing + Colissimo shipping)_'
-            : '🕌 Commandes avant l\'Aïd prioritaires !\nColissimo : livré en 2-3 jours.\nMondial Relay : livré en 3-5 jours.\n\n_(24h de préparation + Colissimo)_',
+            ? '🕌 Orders before Eid are prioritized!\nColissimo: delivered in 2-3 days.\nMondial Relay: delivered in 3-5 days.\n\n_(24h processing + 24-48h Colissimo / 48-96h Mondial Relay)_'
+            : '🕌 Commandes avant l\'Aïd prioritaires !\nColissimo : livré en 2-3 jours.\nMondial Relay : livré en 3-5 jours.\n\n_(24h de préparation + 24-48h Colissimo / 48-96h Mondial Relay)_',
           suggestions,
         }
       }
       return {
         reply: lang === 'en'
-          ? '⏱️ Colissimo: delivered in 2-3 days.\nMondial Relay: delivered in 3-5 days.\n\n_(24h processing + Colissimo shipping)_'
-          : '⏱️ Colissimo : livré en 2-3 jours.\nMondial Relay : livré en 3-5 jours.\n\n_(24h de préparation + Colissimo)_',
+          ? '⏱️ Colissimo: delivered in 2-3 days.\nMondial Relay: delivered in 3-5 days.\n\n_(24h processing + 24-48h Colissimo / 48-96h Mondial Relay)_'
+          : '⏱️ Colissimo : livré en 2-3 jours.\nMondial Relay : livré en 3-5 jours.\n\n_(24h de préparation + 24-48h Colissimo / 48-96h Mondial Relay)_',
         suggestions,
       }
     }
