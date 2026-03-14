@@ -1,4 +1,8 @@
 node_modules/
 .next/
-.env.local
+out/
 .env
+.env.local
+.env.production.local
+*.tsbuildinfo
+next-env.d.ts
