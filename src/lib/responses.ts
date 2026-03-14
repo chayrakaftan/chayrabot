@@ -40,11 +40,31 @@ export function generateResponse(intent: Intent, message: string, lang: Lang, co
           suggestions,
         }
       }
+      // Si mention d'un pays spécifique
+      if (/(belgique|luxembourg|belge|lux)/.test(m)) {
+        return {
+          reply: '📦 Belgique/Luxembourg : **15,99€** de frais de port.\nDélai : 2-7 jours ouvrés.',
+          suggestions,
+        }
+      }
+      if (/(espagne|italie|allemagne|portugal|pays-bas|europe|eu\b)/.test(m)) {
+        return {
+          reply: '📦 Autres pays EU : **19,50€** de frais de port.\nDélai : 2-7 jours ouvrés.',
+          suggestions,
+        }
+      }
+      if (/(france|français|francais|métropole|metropole)/.test(m)) {
+        return {
+          reply: '📦 France : livraison **offerte dès 2 articles** ! Sinon 8,99€.\nDélai : 2-7 jours ouvrés.',
+          suggestions,
+        }
+      }
+      // Question générale → demander le pays
       return {
         reply: lang === 'en'
-          ? '📦 **Shipping:**\n• France: Free from €65, otherwise €8.99\n• Belgium/Lux: €15.99 | Other EU: €19.50\n• Delivery: 2-7 business days'
-          : '📦 **Livraison :**\n• France : gratuite dès 65€, sinon 8,99€\n• Belgique/Lux : 15,99€ | Autres EU : 19,50€\n• Délai : 2-7 jours ouvrés',
-        suggestions,
+          ? '📦 Delivery is 2-7 business days. Which country are you in? I\'ll give you the exact shipping cost!'
+          : '📦 Livraison sous 2-7 jours ouvrés.\n\nDans quel pays êtes-vous ? Je vous donne les frais exacts !',
+        suggestions: ['France', 'Belgique', 'Autre pays EU', 'Autre question'],
       }
     }
 
