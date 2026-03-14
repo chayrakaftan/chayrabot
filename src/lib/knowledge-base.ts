@@ -19,9 +19,9 @@ export const PRODUCTS: Product[] = [
   { name: 'Gandoura Abaya Zaji', collection: 'abaya', price: 52.95, color: 'Blanc pur', fabric: '70% Crêpe, 30% Polyester', sizes: 'Taille unique (36-44)', mannequin: '1m67', inStock: true, description: 'Abaya blanc pur avec Sfifa artisanale. Liberté de mouvement.' },
 
   // --- GANDOURA MIXTE (tissu léger) ---
-  { name: 'Gandoura Mixte Blush', collection: 'mixte', price: 45.00, color: 'Rose poudré / Blush', fabric: 'Tissu léger haute qualité', sizes: 'Taille unique (36-44)', mannequin: '1m64', inStock: false, description: 'Gandoura mixte rose tendre avec Sfifa artisanale. Design minimaliste.' },
-  { name: 'Gandoura Mixte Cannelle', collection: 'mixte', price: 45.00, color: 'Cannelle / Marron', fabric: 'Tissu léger haute qualité', sizes: 'Taille unique (36-44)', mannequin: '1m64', inStock: false, description: 'Gandoura mixte couleur cannelle avec Sfifa artisanale. Marron riche et intemporel.' },
-  { name: 'Gandoura Mixte Émeraude', collection: 'mixte', price: 45.00, color: 'Émeraude', fabric: 'Tissu léger haute qualité', sizes: 'Taille unique (36-44)', mannequin: '1m64', inStock: false, description: 'Gandoura mixte émeraude avec broderie traditionnelle.' },
+  { name: 'Gandoura Mixte Blush', collection: 'mixte', price: 45.00, color: 'Rose poudré / Blush', fabric: '50% Lin, 50% Viscose', sizes: 'Taille unique (36-44)', mannequin: '1m64', inStock: false, description: 'Gandoura mixte rose tendre avec Sfifa artisanale. Design minimaliste.' },
+  { name: 'Gandoura Mixte Cannelle', collection: 'mixte', price: 45.00, color: 'Cannelle / Marron', fabric: '50% Lin, 50% Viscose', sizes: 'Taille unique (36-44)', mannequin: '1m64', inStock: false, description: 'Gandoura mixte couleur cannelle avec Sfifa artisanale. Marron riche et intemporel.' },
+  { name: 'Gandoura Mixte Émeraude', collection: 'mixte', price: 45.00, color: 'Émeraude', fabric: '50% Lin, 50% Viscose', sizes: 'Taille unique (36-44)', mannequin: '1m64', inStock: false, description: 'Gandoura mixte émeraude avec broderie traditionnelle.' },
 
   // --- GANDOURA PAPILLON (50% Lin, 50% Viscose) ---
   { name: 'Gandoura Papillon Brume', collection: 'papillon', price: 55.00, color: 'Gris doux', fabric: '50% Lin, 50% Viscose', sizes: 'Taille unique (36-46)', mannequin: '1m64', inStock: false, description: 'Gandoura papillon gris intemporel. Sfifa brodée main, manches ultra-amples.' },
@@ -111,7 +111,7 @@ export const BRAND = {
 // ============================================================
 export const COLLECTIONS = {
   abaya: { name: 'Gandoura Abaya', priceRange: '45€ - 52,95€', fabric: '70% Crêpe, 30% Polyester', sizeRange: '36-44', description: 'Coupe abaya moderne, silhouette ample et aérienne, excellent tombé et opacité' },
-  mixte: { name: 'Gandoura Mixte', priceRange: '45€', fabric: 'Tissu léger haute qualité', sizeRange: '36-44', description: 'Style mixte/unisexe, design minimaliste avec broderie artisanale' },
+  mixte: { name: 'Gandoura Mixte', priceRange: '45€', fabric: '50% Lin, 50% Viscose', sizeRange: '36-44', description: 'Style mixte/unisexe, design minimaliste avec broderie artisanale' },
   papillon: { name: 'Gandoura Papillon', priceRange: '55€', fabric: '50% Lin, 50% Viscose', sizeRange: '36-46', description: 'Manches ultra-amples ailes de papillon, repassage minimal' },
 }
 

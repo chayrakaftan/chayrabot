@@ -177,11 +177,39 @@ export function generateResponse(intent: Intent, message: string, lang: Lang, co
       }
 
       if (/(fabri[qc]|origine|maroc|fait.*main|artisan|sfifa|broder|ou sont fait|ou est fait|provenance|savoir-faire|savoir faire)/.test(m)) {
+        // If asking about a specific collection's fabric
+        if (/(abaya)/.test(m)) {
+          return {
+            reply: '🧵 La **Gandoura Abaya** est fabriquée en **70% Crêpe, 30% Polyester**.',
+            suggestions,
+          }
+        }
+        if (/(papillon)/.test(m)) {
+          return {
+            reply: '🧵 La **Gandoura Papillon** est fabriquée en **50% Lin, 50% Viscose**.',
+            suggestions,
+          }
+        }
+        if (/(mixte)/.test(m)) {
+          return {
+            reply: '🧵 La **Gandoura Mixte** est fabriquée en **50% Lin, 50% Viscose**.',
+            suggestions,
+          }
+        }
+        // Generic fabrication question
+        if (/(matiere|tissu|fabric|composition|en quoi)/.test(m)) {
+          return {
+            reply: lang === 'en'
+              ? '🧵 What material would you like to know about?'
+              : '🧵 Pour quel modèle souhaitez-vous connaître la matière ?',
+            suggestions: ['Gandoura Abaya', 'Gandoura Papillon', 'Gandoura Mixte', 'Autre question'],
+          }
+        }
         return {
           reply: lang === 'en'
-            ? '🇲🇦 Our gandouras are designed and made in **Morocco**.\nThe **Sfifa** is an ancestral embroidery, handcrafted by Moroccan artisans following traditional techniques passed down through generations.\n\n• Abaya: 70% Crêpe, 30% Polyester\n• Papillon: 50% Linen, 50% Viscose\n• Mixte: premium lightweight fabric'
-            : '🇲🇦 Nos gandouras sont conçues et fabriquées au **Maroc**.\nLa **Sfifa** est une broderie ancestrale, réalisée entièrement à la main par des artisans marocains selon un savoir-faire transmis de génération en génération.\n\n• Abaya : 70% Crêpe, 30% Polyester\n• Papillon : 50% Lin, 50% Viscose\n• Mixte : tissu léger haute qualité',
-          suggestions,
+            ? '🇲🇦 Our gandouras are designed and made in **Morocco**.\nThe **Sfifa** is an ancestral embroidery, handcrafted by Moroccan artisans following traditional techniques passed down through generations.'
+            : '🇲🇦 Nos gandouras sont conçues et fabriquées au **Maroc**.\nLa **Sfifa** est une broderie ancestrale, réalisée entièrement à la main par des artisans marocains selon un savoir-faire transmis de génération en génération.',
+          suggestions: ['Gandoura Abaya', 'Gandoura Papillon', 'Gandoura Mixte', 'Autre question'],
         }
       }
 
