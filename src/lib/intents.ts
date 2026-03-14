@@ -13,6 +13,11 @@ const RETOUR_FALSE_POSITIVES = [
 export function detectIntent(message: string): Intent {
   const m = normalize(message)
 
+  // --- "Autre question" suggestion button ---
+  if (/^autre\s*(question|chose)?$/.test(m)) {
+    return 'salutation'
+  }
+
   // --- Salutation ---
   if (/^(bonjour|bonsoir|salut|hello|hi|hey|salam|wa?\s?aleykoum|coucou)\b/.test(m) && m.length < 40) {
     return 'salutation'
