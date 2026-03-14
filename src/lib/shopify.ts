@@ -48,17 +48,18 @@ export function formatOrderStatus(order: ShopifyOrder): {
   const tracking = fulfillment?.tracking_number || undefined
   const trackingUrl = fulfillment?.tracking_url || 'https://chayrakaftan.com/apps/parcelpanel'
 
+  // Determine if delivered
+  const isDelivered = fulfillment?.status === 'delivered'
+    || fulfillment?.status === 'success'
+    || order.tags?.includes('delivered')
+    || order.tags?.includes('livré')
+
   // Determine status key
   let statusKey = 'orderProcessing'
   if (order.financial_status === 'refunded') {
     statusKey = 'orderRefunded'
   } else if (order.fulfillment_status === 'fulfilled') {
-    // Check if delivered (tracking status or tag)
-    if (fulfillment?.status === 'delivered' || order.tags?.includes('delivered')) {
-      statusKey = 'orderDelivered'
-    } else {
-      statusKey = 'orderShipped'
-    }
+    statusKey = isDelivered ? 'orderDelivered' : 'orderShipped'
   } else if (order.financial_status === 'paid') {
     statusKey = order.fulfillment_status ? 'orderShipped' : 'orderPaid'
   }
@@ -70,14 +71,13 @@ export function formatOrderStatus(order: ShopifyOrder): {
     partially_refunded: 'Partiellement remboursée',
     voided: 'Annulée',
   }
-  const fulfillmentMap: Record<string, string> = {
-    fulfilled: 'Expédiée',
-    partial: 'Partiellement expédiée',
-    unfulfilled: 'En préparation',
-  }
 
   const financialLabel = statusMap[order.financial_status] || order.financial_status
-  const fulfillmentLabel = fulfillmentMap[order.fulfillment_status || 'unfulfilled'] || 'En préparation'
+  const fulfillmentLabel = order.fulfillment_status === 'fulfilled'
+    ? (isDelivered ? 'Livrée ✅' : 'Expédiée')
+    : order.fulfillment_status === 'partial'
+      ? 'Partiellement expédiée'
+      : 'En préparation'
 
   return {
     status: `${financialLabel} — ${fulfillmentLabel}`,
