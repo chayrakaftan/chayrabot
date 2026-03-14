@@ -28,6 +28,11 @@ export function detectIntent(message: string): Intent {
     return 'remerciement'
   }
 
+  // --- Retard / délai dépassé ---
+  if (/(toujours pas|pas encore|en retard|trop long|tarde|attend.*depuis|depasse|late|still not|jamais recu|pas recu|pas traite|pas expedie|pas livre|long temps|prend du temps)/.test(m)) {
+    return 'retard'
+  }
+
   // --- Suivi commande ---
   if (/(ou est|ou en est|suivi|suivre|track|numero de suivi|statut|status|commande.*livr|colis|recevo?ir|expedition|expedie|shipped)/.test(m)) {
     return 'suivi_commande'

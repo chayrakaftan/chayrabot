@@ -29,6 +29,15 @@ export function generateResponse(intent: Intent, message: string, lang: Lang, co
         suggestions: ['#1234', 'Autre question'],
       }
 
+    // ==================== RETARD ====================
+    case 'retard':
+      return {
+        reply: lang === 'en'
+          ? '😔 We apologize, due to high demand, processing or shipping times may be extended. Don\'t worry, the ChayraKaftan team is doing everything to deliver you as soon as possible!'
+          : '😔 Nous sommes désolés, suite à une forte affluence il est possible que les délais de traitement ou d\'expédition soient rallongés. Ne vous en faites pas, l\'équipe ChayraKaftan fait tout pour que vous soyez livré dans les meilleurs délais !',
+        suggestions,
+      }
+
     // ==================== DÉLAIS LIVRAISON ====================
     case 'livraison': {
       const m = message.toLowerCase()

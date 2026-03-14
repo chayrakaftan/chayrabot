@@ -1,5 +1,6 @@
 export type Intent =
   | 'suivi_commande'
+  | 'retard'
   | 'info_produit'
   | 'livraison'
   | 'frais_livraison'
