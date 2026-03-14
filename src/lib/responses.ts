@@ -49,11 +49,21 @@ export function generateResponse(intent: Intent, message: string, lang: Lang, co
           suggestions,
         }
       }
+      if (/(delai|combien de temps|quand|temps|jours|expedition)/.test(m)) {
+        return {
+          reply: lang === 'en'
+            ? '⏱️ **Colissimo** : delivered in 2-3 days.\n*(Processing 24h + Colissimo 1-2 days)*\n\n**Mondial Relay** : delivered in 3-5 days.\n*(Processing 24h + Mondial Relay 2-4 days)*'
+            : '⏱️ **Colissimo** : livré en 2-3 jours.\n*(Traitement 24h + Colissimo 1-2 jours)*\n\n**Mondial Relay** : livré en 3-5 jours.\n*(Traitement 24h + Mondial Relay 2-4 jours)*',
+          suggestions,
+        }
+      }
+      // Generic "livraison" → ask frais or délais
       return {
         reply: lang === 'en'
-          ? '⏱️ **Colissimo** : delivered in 2-3 days.\n*(Processing 24h + Colissimo 1-2 days)*\n\n**Mondial Relay** : delivered in 3-5 days.\n*(Processing 24h + Mondial Relay 2-4 days)*'
-          : '⏱️ **Colissimo** : livré en 2-3 jours.\n*(Traitement 24h + Colissimo 1-2 jours)*\n\n**Mondial Relay** : livré en 3-5 jours.\n*(Traitement 24h + Mondial Relay 2-4 jours)*',
-        suggestions,
+          ? '📦 What would you like to know about shipping?'
+          : '📦 Que souhaitez-vous savoir sur la livraison ?',
+        suggestions: ['Délais de livraison', 'Frais de livraison', 'Livré avant l\'Aïd ?', 'Autre question'],
+        context: { awaitingLivraisonChoice: true },
       }
     }
 

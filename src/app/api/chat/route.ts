@@ -29,6 +29,30 @@ export async function POST(req: NextRequest) {
     const msg = message.trim()
 
     // ============================================================
+    // FLOW: Awaiting livraison choice (frais or délais)
+    // ============================================================
+    if (context?.awaitingLivraisonChoice) {
+      const m = msg.toLowerCase()
+      if (/autre\s*(question|chose)/.test(m)) {
+        return json({ reply: t('greeting', lang), suggestions: getSuggestions(lang), lang })
+      }
+      // Route to the right intent
+      const intent = detectIntent(msg)
+      if (intent !== 'question_generale') {
+        const resp = generateResponse(intent, msg, lang)
+        return json({ ...resp, lang })
+      }
+      return json({
+        reply: lang === 'en'
+          ? '📦 What would you like to know about shipping?'
+          : '📦 Que souhaitez-vous savoir sur la livraison ?',
+        suggestions: ['Délais de livraison', 'Frais de livraison', 'Livré avant l\'Aïd ?', 'Autre question'],
+        context: { awaitingLivraisonChoice: true },
+        lang,
+      })
+    }
+
+    // ============================================================
     // FLOW: Awaiting country for shipping cost
     // ============================================================
     if (context?.awaitingCountry) {

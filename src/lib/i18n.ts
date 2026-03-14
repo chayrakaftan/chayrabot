@@ -73,7 +73,7 @@ export function detectLanguage(message: string): Lang {
 }
 
 export function getSuggestions(lang: Lang): string[] {
-  if (lang === 'en') return ['Where is my order?', 'Shipping cost', 'Delivery times', 'Delivered before Eid?', 'Size guide', 'Made in 🇲🇦', 'Contact us']
-  if (lang === 'ar') return ['أين طلبي؟', 'تكلفة الشحن', 'مواعيد التوصيل', 'التوصيل قبل العيد؟', 'دليل المقاسات', 'صنع في 🇲🇦', 'اتصل بنا']
-  return ['Où est ma commande ?', 'Frais de livraison', 'Délais de livraison', 'Livré avant l\'Aïd ?', 'Tailles', 'Fabrication 🇲🇦', 'Nous contacter']
+  if (lang === 'en') return ['Where is my order?', 'Shipping', 'Delivered before Eid?', 'Size guide', 'Made in 🇲🇦', 'Contact us']
+  if (lang === 'ar') return ['أين طلبي؟', 'التوصيل', 'التوصيل قبل العيد؟', 'دليل المقاسات', 'صنع في 🇲🇦', 'اتصل بنا']
+  return ['Où est ma commande ?', 'Livraison', 'Livré avant l\'Aïd ?', 'Tailles', 'Fabrication 🇲🇦', 'Nous contacter']
 }

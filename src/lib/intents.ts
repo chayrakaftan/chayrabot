@@ -71,9 +71,9 @@ export function detectIntent(message: string): Intent {
   if (/(delai|combien de temps|quand.*livr|livr.*quand|shipping|delivery|expedition|jours.*livr)/.test(m)) {
     return 'livraison'
   }
-  // Fallback "livraison" seul → frais (demande le pays)
+  // Fallback "livraison" seul → demande frais ou délais
   if (/(livraison)/.test(m)) {
-    return 'frais_livraison'
+    return 'livraison'
   }
 
   // --- Taille ---

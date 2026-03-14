@@ -31,6 +31,7 @@ export interface ChatContext {
   awaitingEmail?: boolean
   awaitingCountry?: boolean
   awaitingModel?: boolean
+  awaitingLivraisonChoice?: boolean
   awaitingColor?: boolean
   selectedCollection?: string
   orderNumber?: string
