@@ -34,13 +34,17 @@ export async function POST(req: NextRequest) {
     if (context?.awaitingCountry) {
       const m = msg.toLowerCase()
       const suggestions = getSuggestions(lang)
+      // "Autre question" → exit country flow
+      if (/autre\s*(question|chose)/.test(m)) {
+        return json({ reply: t('greeting', lang), suggestions, lang })
+      }
       if (/(france|français|francais|métropole|metropole)/.test(m)) {
         return json({ reply: '📦 France : livraison **offerte dès 2 articles** ! Sinon 8,99€.', suggestions, lang })
       }
       if (/(belgique|luxembourg|belge|lux)/.test(m)) {
         return json({ reply: '📦 Belgique/Luxembourg : **15,99€**', suggestions, lang })
       }
-      if (/(espagne|italie|allemagne|portugal|pays-bas|europe|eu|autre)/.test(m)) {
+      if (/(espagne|italie|allemagne|portugal|pays-bas|europe|eu|autre\s*pays)/.test(m)) {
         return json({ reply: '📦 Autres pays EU : **19,50€**', suggestions, lang })
       }
       // Not a country → try normal intent
@@ -64,6 +68,10 @@ export async function POST(req: NextRequest) {
     if (context?.awaitingModel) {
       const m = msg.toLowerCase()
       const suggestions = getSuggestions(lang)
+      // "Autre question" → exit model flow
+      if (/autre\s*(question|chose)/.test(m)) {
+        return json({ reply: t('greeting', lang), suggestions, lang })
+      }
       type CollectionKey = 'abaya' | 'papillon' | 'mixte'
       const collections: { key: CollectionKey; regex: RegExp; label: string }[] = [
         { key: 'abaya', regex: /(abaya)/, label: 'Gandoura Abaya' },
