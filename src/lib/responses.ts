@@ -33,8 +33,8 @@ export function generateResponse(intent: Intent, message: string, lang: Lang, co
     case 'retard':
       return {
         reply: lang === 'en'
-          ? '😔 We apologize, due to high demand, processing or shipping times may be extended. Don\'t worry, the ChayraKaftan team is doing everything to deliver you as soon as possible!'
-          : '😔 Nous sommes désolés, suite à une forte affluence il est possible que les délais de traitement ou d\'expédition soient rallongés. Ne vous en faites pas, l\'équipe ChayraKaftan fait tout pour que vous soyez livré dans les meilleurs délais !',
+          ? '😔 We apologize, due to high demand, processing or shipping times may be extended. Don\'t worry, the **ChayraKaftan** team is doing everything to deliver you as soon as possible!'
+          : '😔 Nous sommes désolés, suite à une forte affluence il est possible que les délais de traitement ou d\'expédition soient rallongés. Ne vous en faites pas, l\'équipe **ChayraKaftan** fait tout pour que vous soyez livré dans les meilleurs délais !',
         suggestions,
       }
 
@@ -192,8 +192,8 @@ export function generateResponse(intent: Intent, message: string, lang: Lang, co
     case 'restock':
       return {
         reply: lang === 'en'
-          ? `🔄 Restocks **every Tuesday at 8pm** (Paris time), limited quantities!\nFollow us on Insta & TikTok: @ChayraKaftan`
-          : `🔄 Réassort **chaque mardi à 20h**, quantités limitées !\nSuivez-nous : @ChayraKaftan sur Insta & TikTok`,
+          ? `🔄 Restocks **every Tuesday at 8pm** (Paris time), limited quantities!\nFollow us on Insta & TikTok: @**ChayraKaftan**`
+          : `🔄 Réassort **chaque mardi à 20h**, quantités limitées !\nSuivez-nous : @**ChayraKaftan** sur Insta & TikTok`,
         suggestions,
       }
 
@@ -214,7 +214,7 @@ export function generateResponse(intent: Intent, message: string, lang: Lang, co
     // ==================== CONTACT ====================
     case 'contact':
       return {
-        reply: `📧 **chayrakaftan@gmail.com**\nInsta & TikTok : @ChayraKaftan\n\nRéponse sous 24h !`,
+        reply: `📧 **chayrakaftan@gmail.com**\nInsta & TikTok : @**ChayraKaftan**\n\nRéponse sous 24h !`,
         suggestions,
       }
 
