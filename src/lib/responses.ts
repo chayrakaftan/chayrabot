@@ -40,7 +40,7 @@ export function generateResponse(intent: Intent, message: string, lang: Lang, co
 
     // ==================== DÉLAIS LIVRAISON ====================
     case 'livraison': {
-      const m = message.toLowerCase()
+      const m = message.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
       if (/(aid|eid|ramadan|fete|a temps)/.test(m)) {
         return {
           reply: lang === 'en'
