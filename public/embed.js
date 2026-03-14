@@ -197,7 +197,7 @@
     launcher.innerHTML = isOpen ? '✕' : '💬';
     if (isOpen && messagesEl.children.length === 0) {
       addBotMessage('Bonjour ! 👋 Je suis **ChayraBot**, l\'assistant de ChayraKaftan.\n\nComment puis-je vous aider ?');
-      showSuggestions(['Où est ma commande ?', 'Frais de livraison', 'Délais de livraison', 'Livré avant l\'Aïd ?', 'Tailles', 'Nous contacter']);
+      showSuggestions(['Où est ma commande ?', 'Frais de livraison', 'Délais de livraison', 'Livré avant l\'Aïd ?', 'Tailles', 'Fabrication 🇲🇦', 'Nous contacter']);
     }
     if (isOpen) inputEl.focus();
   }
